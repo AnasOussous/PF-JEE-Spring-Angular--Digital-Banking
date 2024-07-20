@@ -1,0 +1,33 @@
+<div class="card">
+    <p-panel [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center gap-2">
+                <p-avatar
+                    image="../../assets/avatar.svg"
+                    size="large"
+                    shape="circle" />
+                <span class="font-bold">
+                    {{username}} ({{roles}})
+                </span>
+            </div>
+        </ng-template>
+        <p class="m-0">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto quasi ducimus libero provident ex nesciunt? Odio non cumque id exercitationem voluptates, eius magnam sequi culpa mollitia porro, dolorem tempora!        </p>
+    </p-panel>
+</div>
+<div *ngIf="loginService.userState.isAdmin" class="grid p-fluid">
+    <div class="col-12 lg:col-6">
+        <div class="card h-full">
+            <h5>Accounts by type</h5>
+            <div class="flex justify-content-center">
+                <p-chart type="doughnut" [data]="BankAccountsCount" [options]="sectorOptions" />
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-6">
+        <div class="card h-full">
+            <h5>Operations by month</h5>
+            <p-chart type="bar" [data]="operationsCount" [options]="operationsCount" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+package ma.anasouss.pfjeespringangulardigitalbanking.entities;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import lombok.*;
+import ma.anasouss.pfjeespringangulardigitalbanking.enumirats.AccountStatus;
+import org.hibernate.annotations.UuidGenerator;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE", length = 4)
+@Data @AllArgsConstructor @NoArgsConstructor
+public class BankAccount {
+    @Id @UuidGenerator
+    private String id;
+    private double balance;
+    private Date createdAt;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
+    private String currency;
+    @ManyToOne
+    private Customer customer;
+    @OneToMany(mappedBy = "account")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Operation> operations;
+}
